@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rahul Gupta | Full Stack Reveal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        font-family: "Segoe UI", sans-serif;
+      }
+      .maskdiv {
+        pointer-events: none;
+        transition: opacity 0.4s ease;
+      }
+      .masked {
+        opacity: 1 !important;
+      }
+      .google-btn {
+        background: linear-gradient(45deg, #4285f4, #34a853, #fbbc05, #ea4335);
+        background-size: 300% 300%;
+        animation: shift 5s ease infinite;
+        color: white;
+        font-weight: 600;
+        border-radius: 9999px;
+        padding: 12px 24px;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        transition: transform 0.2s ease;
+      }
+      .google-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
+      }
+      @keyframes shift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1s ease-out forwards;
+      }
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-black text-white overflow-hidden relative">
+    <!-- INTRO SECTION -->
+    <div id="intro" class="w-full h-screen relative group">
+      <img
+        src="https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&w=1600&q=80"
+        alt="Background Image"
+        class="w-full h-full object-cover opacity-10"
+      />
+
+      <div
+        class="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-4"
+      >
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-4 fade-in-up">
+          Rahul Gupta
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 fade-in-up">
+          Full Stack Web Developer
+        </p>
+        <p class="mt-2 text-sm md:text-base text-green-400 fade-in-up">
+          Working @ Sanglob Business Services | 3+ Years Experience
+        </p>
+        <p class="mt-4 mb-2 px-4 fade-in-up">
+          Tech Stack: MERN, JavaScript, PHP, Laravel, MySQL, WordPress, Tailwind
+          CSS, Bootstrap
+        </p>
+        <button id="revealBtn" class="google-btn fade-in-up mt-2">
+          Reveal My Work 🔦
+        </button>
+      </div>
+
+    </div>
+
+    <!-- REVEAL SECTION -->
+    <div id="revealSection" class="hidden relative w-full h-screen group">
+      <!-- Background -->
+      <img
+        src="https://images.unsplash.com/photo-1599423300746-b62533397364?auto=format&fit=crop&w=1600&q=80"
+        alt="Reveal Background"
+        class="w-full h-full object-cover absolute inset-0 z-0 brightness-50"
+      />
+
+      <!-- Mask Layer -->
+      <div
+        id="maskLayer"
+        class="maskdiv w-full h-full absolute top-0 left-0 z-10 opacity-0 transition-opacity duration-500"
+      >
+        <img
+          src="rahul college image.png"
+          alt="Torch Mask Image"
+          class="w-full h-full object-cover"
+        />
+      </div>
+
+      <!-- Text Content -->
+      <div
+        class="relative z-20 flex flex-col justify-center items-center text-center h-full px-4"
+      >
+        <h2 class="text-4xl md:text-6xl font-extrabold mb-4 fade-in-up">
+          Rahul Gupta
+        </h2>
+        <p class="text-lg md:text-2xl text-green-400 mb-2 fade-in-up">
+          Full Stack Developer at Sanglob Business Services
+        </p>
+        <p class="text-sm md:text-base text-gray-300 max-w-2xl fade-in-up">
+          2+ Years of experience building high-performance apps using MERN,
+          Laravel, PHP, JavaScript, and Tailwind CSS.<br />
+          Let’s build something extraordinary together 🚀
+        </p>
+      </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+      const revealBtn = document.getElementById("revealBtn");
+      const intro = document.getElementById("intro");
+      const revealSection = document.getElementById("revealSection");
+      const maskLayer = document.getElementById("maskLayer");
+
+      revealBtn.addEventListener("click", () => {
+        intro.classList.add("hidden");
+        revealSection.classList.remove("hidden");
+        maskLayer.classList.add("masked");
+        document.title = "✨ Rahul Gupta | Full Stack Reveal";
+      });
+
+      revealSection.addEventListener("mousemove", (e) => {
+        const x = e.clientX;
+        const y = e.clientY;
+        maskLayer.style.webkitMaskImage = `radial-gradient(circle at ${x}px ${y}px, black 0, black 130px, transparent 150px)`;
+        maskLayer.style.maskImage = `radial-gradient(circle at ${x}px ${y}px, black 0, black 130px, transparent 150px)`;
+      });
+
+      const titles = [
+        "👨‍💻 Rahul Gupta | Full Stack Dev",
+        "🚀 MERN • Laravel • WordPress",
+        "🔦 Hover to Explore My Work",
+      ];
+      let index = 0;
+      setInterval(() => {
+        if (!revealSection.classList.contains("hidden")) {
+          document.title = titles[index++ % titles.length];
+        }
+      }, 3000);
+    </script>
+  </body>
+</html>

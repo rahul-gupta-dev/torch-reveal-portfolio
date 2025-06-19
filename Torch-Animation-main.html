@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rahul Gupta | Naam to suna hoga</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      crossorigin="anonymous"
+    />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", sans-serif;
+        scroll-behavior: smooth;
+      }
+      .google-btn {
+        background: linear-gradient(
+          45deg,
+          #4285f4,
+          #34a853,
+          #fbbd05d2,
+          #ea4435e1
+        );
+        background-size: 300% 300%;
+        animation: shift 5s ease infinite;
+        color: #fff;
+        font-weight: 600;
+        border-radius: 9999px;
+        padding: 10px 20px;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        transition: animation 0.2s ease;
+
+        &:hover {
+          transform: scale(0.99);
+        }
+      }
+      .google-btn i {
+        animation: bounceArrow 1s ease-in-out infinite;
+      }
+      @keyframes shift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      @keyframes bounceArrow {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        50% {
+          transform: translateX(6px);
+        }
+      }
+      .menu-item.active {
+        color: #34a853;
+        font-weight: bold;
+      }
+      .tab-btn.active {
+        background-color: #1f2937;
+        color: white;
+      }
+      .timeline {
+        border-left: 2px solid #f0f0f0;
+        padding-left: 1rem;
+      }
+      .timeline-entry {
+        margin-bottom: 1rem;
+      }
+      #college .timeline-entry::before {
+        /* content: "";
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: #34a853;
+        border-radius: 50%;
+        margin-right: 10px; */
+        content: "🎓";
+        position: absolute;
+        display: inline-block;
+        margin-right: 10px;
+        left: 13px;
+      }
+      #corporate .timeline-entry::before {
+      
+        position: absolute;
+        display: inline-block;
+        margin-right: 10px;
+        left: 13px;
+      content: "🏢";
+      }
+
+
+      .maskdiv {
+        pointer-events: none;
+        transition: opacity 0.4s ease;
+      }
+      #contactForm {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90vh;
+        flex-direction: column;
+      }
+      #successCard {
+        height: 75vh;
+        place-content: center;
+      }
+    </style>
+  </head>
+  <body class="bg-black text-white overflow-hidden relative">
+    <!-- INTRO -->
+    <div id="intro" class="relative w-full h-screen group">
+      <img
+        src="https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&w=1600&q=80"
+        alt="Background Image"
+        class="w-full h-full object-cover opacity-10"
+      />
+
+      <div
+        class="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-4"
+      >
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-4">Rahul Gupta</h1>
+        <p class="text-xl md:text-2xl text-gray-300">
+          Full Stack Web Developer
+        </p>
+        <p class="text-green-400 mt-2">@Sanglob Business Services | 3+ Years</p>
+        <p class="my-4">
+          MERN, JavaScript, PHP, Laravel, MySQL, WordPress, Tailwind CSS,
+          Bootstrap
+        </p>
+        <button id="revealBtn" class="google-btn">
+          Reveal My Work <i class="fa fa-long-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Hover preview (optional mask layer) -->
+    <div
+      class="maskdiv w-full h-full absolute top-0 left-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+    >
+      <img
+        src="https://images.unsplash.com/photo-1614283138638-0c36c9618e37?auto=format&fit=crop&w=1600&q=80"
+        class="w-full h-full object-cover"
+      />
+    </div>
+    <!-- MAIN SECTION -->
+     
+    <section
+      id="revealSection"
+      class="hidden min-h-screen bg-[#0f0f0f] text-white"
+    >
+      <header
+        class="flex justify-between items-center px-6 py-4 border-b border-gray-800"
+      >
+        <div class="space-x-4 text-lg">
+          <button class="menu-item" onclick="goHome(event)">Home</button>
+          <button class="menu-item" onclick="showSection(event, 'projects')">
+            Projects
+          </button>
+          <button class="menu-item" onclick="showSection(event, 'experience')">
+            Experience
+          </button>
+          <button class="menu-item" onclick="showSection(event, 'contact')">
+            Contact
+          </button>
+        </div>
+        <a
+          href="Rahul_Gupta_Resume.pdf"
+          target="_blank"
+          class="text-green-400 hover:underline text-sm"
+        >
+          <i class="fa-solid fa-download"></i> Resume
+        </a>
+      </header>
+
+      <!-- Home -->
+      <div id="home" class="p-6 hidden">
+        <h2 class="text-3xl font-bold mb-2">Welcome to My Portfolio</h2>
+        <p class="text-gray-400 max-w-xl">
+          Explore my journey as a developer — showcasing real-world projects,
+          experiences, and expertise in full-stack web development.
+        </p>
+      </div>
+
+      <!-- Projects -->
+      <div
+        id="projects"
+        class="p-6 hidden bg-gradient-to-r from-[#1a2a6c] via-[#b21f1f] to-[#fdbb2d]"
+      >
+        <h2 class="text-3xl font-bold mb-4">Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="bg-white/10 p-4 rounded shadow">
+            <img
+              src="imageUrl"
+              alt="Project Thumbnail"
+              class="rounded mb-3"
+            />
+            <h3 class="text-xl font-semibold">CinemaHub Clone</h3>
+            <p class="text-gray-300">
+              React-based streaming app UI. Jio Cinema clone. Fully responsive
+              with JSON API.
+            </p>
+            <p class="text-sm text-gray-400 mt-1">March 2025</p>
+            <a
+              href="https://github.com/rahulg078/cinema-hub-react"
+              class="text-blue-400 mt-2 inline-block" target="_blank"
+              >GitHub ↗</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Experience -->
+      <div id="experience" class="p-6 hidden">
+        <h2 class="text-3xl font-bold mb-4">My Timeline Horizine</h2>
+        <div class="flex space-x-4 mb-4">
+          <button
+            class="tab-btn px-4 py-2 rounded border"
+            onclick="toggleTab(event, 'college')"
+          >
+            College
+          </button>
+          <button
+            class="tab-btn px-4 py-2 rounded border"
+            onclick="toggleTab(event, 'corporate')"
+          >
+            Corporate
+          </button>
+        </div>
+      
+        <div id="college" class="timeline">
+          <div class="timeline-entry">2023 – MCA – AKS University, Satna (CGPA: 7.6)</div>
+          <div class="timeline-entry">2021 – B.Sc (CS) – Govt. Degree College, Satna (62%)</div>
+          <div class="timeline-entry">2017 – 12th Completed – Govt. Degree College, Satna</div>
+        </div>
+        <div id="corporate" class="timeline hidden">
+          <div class="timeline-entry">Jan 2024–Present – Full Stack Developer – Sanglob Business Services</div>
+          <div class="timeline-entry">May–Dec 2023 – Developer – Gazick Private Limited</div>
+          <div class="timeline-entry">Jan–Apr 2023 – Web Developer Intern – AKS IT Universe, Satna</div>
+        </div>
+      </div>
+
+
+      <!-- Contact -->
+      <div id="contact" class="p-6 hidden">
+        <h2 class="text-3xl font-bold mb-2">Contact Me</h2>
+        <div
+          id="successCard"
+          class="hidden text-center p-6 bg-zinc-900 rounded shadow-lg max-w-xl mx-auto"
+        >
+          <h3 class="text-2xl font-bold text-green-400">🎉 Thank You!</h3>
+          <p class="mt-2 text-gray-300">
+            Your message has been successfully sent. I’ll get back to you soon.
+          </p>
+        </div>
+        <form id="contactForm" class="max-w-xl mx-auto space-y-4">
+          <input
+            type="text"
+            placeholder="Your Name"
+            class="w-full p-2 bg-zinc-800 border border-zinc-700 rounded"
+            required
+          />
+          <input
+            type="email"
+            placeholder="Your Email"
+            class="w-full p-2 bg-zinc-800 border border-zinc-700 rounded"
+            required
+          />
+          <textarea
+            placeholder="Your Message"
+            class="w-full p-2 bg-zinc-800 border border-zinc-700 rounded h-32"
+            required
+          ></textarea>
+          <button type="submit" class="google-btn">Send Message 📩</button>
+        </form>
+      </div>
+    </section>
+
+    <script>
+      const revealBtn = document.getElementById("revealBtn");
+      const intro = document.getElementById("intro");
+      const revealSection = document.getElementById("revealSection");
+      const tabs = ["college", "corporate"];
+      let tabIndex = 0;
+      let autoTab = true;
+
+      revealBtn.addEventListener("click", () => {
+        localStorage.setItem("activeSection", "home");
+        intro.classList.add("hidden");
+        revealSection.classList.remove("hidden");
+        showSection(null, "home");
+        startAutoTab();
+      });
+
+      function goHome(e) {
+        localStorage.setItem("activeSection", "home");
+        intro.classList.remove("hidden");
+        revealSection.classList.add("hidden");
+        document
+          .querySelectorAll(".menu-item")
+          .forEach((btn) => btn.classList.remove("active"));
+        e.target.classList.add("active");
+      }
+
+      function showSection(e, id) {
+        localStorage.setItem("activeSection", id);
+        intro.classList.add("hidden");
+        revealSection.classList.remove("hidden");
+
+        document
+          .querySelectorAll("#revealSection > div")
+          .forEach((div) => div.classList.add("hidden"));
+        document.getElementById(id).classList.remove("hidden");
+
+        document
+          .querySelectorAll(".menu-item")
+          .forEach((btn) => btn.classList.remove("active"));
+        if (e) e.target.classList.add("active");
+      }
+
+      function toggleTab(e, type) {
+        autoTab = false;
+        document
+          .getElementById("college")
+          .classList.toggle("hidden", type !== "college");
+        document
+          .getElementById("corporate")
+          .classList.toggle("hidden", type !== "corporate");
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+        e.target.classList.add("active");
+      }
+
+      function startAutoTab() {
+        setInterval(() => {
+          if (autoTab) {
+            const current = tabs[tabIndex % tabs.length];
+            document.getElementById("college").classList.add("hidden");
+            document.getElementById("corporate").classList.add("hidden");
+            document.getElementById(current).classList.remove("hidden");
+            document
+              .querySelectorAll(".tab-btn")
+              .forEach((btn) => btn.classList.remove("active"));
+            document
+              .querySelectorAll(".tab-btn")
+              [tabIndex % tabs.length].classList.add("active");
+            tabIndex++;
+          }
+        }, 4000);
+      }
+
+      const titles = [
+        "👨‍💻 Rahul Gupta | Full Stack Dev",
+        "🚀 MERN • Laravel • WordPress",
+        "📁 Projects | 🔧 Experience | 📬 Contact",
+      ];
+      let index = 0;
+      setInterval(() => {
+        if (!revealSection.classList.contains("hidden")) {
+          document.title = titles[index++ % titles.length];
+        }
+      }, 4000);
+
+      window.onload = () => {
+        const active = localStorage.getItem("activeSection");
+        if (active && active !== "home") {
+          intro.classList.add("hidden");
+          revealSection.classList.remove("hidden");
+          document.getElementById(active).classList.remove("hidden");
+          document.querySelectorAll(".menu-item").forEach((btn) => {
+            btn.classList.remove("active");
+            if (btn.textContent.toLowerCase().includes(active))
+              btn.classList.add("active");
+          });
+        }
+      };
+
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          confetti({ particleCount: 150, spread: 60, origin: { y: 0.6 } });
+          document.getElementById("contactForm").style.display = "none";
+          document.getElementById("successCard").classList.remove("hidden");
+        });
+    </script>
+  </body>
+</html>
